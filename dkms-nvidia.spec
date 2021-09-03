@@ -42,7 +42,7 @@ cp -fr kernel/* %{buildroot}%{_usrsrc}/%{dkms_name}-%{version}/
 
 %if 0%{?fedora}
 # Do not enable weak modules support in Fedora (no kABI):
-install -p -m 644 -D %{SOURCE2} %{buildroot}%{_sysconfdir}/dkms/nvidia.conf
+install -p -m 644 -D %{SOURCE2} %{buildroot}%{_sysconfdir}/dkms/%{dkms_nvidia}.conf
 %endif
 
 %post
@@ -58,7 +58,7 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %files
 %{_usrsrc}/%{dkms_name}-%{version}
 %if 0%{?fedora}
-%{_sysconfdir}/dkms/nvidia.conf
+%{_sysconfdir}/dkms/%{dkms_nvidia}.conf
 %endif
 
 %changelog
