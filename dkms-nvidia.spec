@@ -3,7 +3,7 @@
 
 Name:           dkms-%{dkms_name}
 Version:        495.44
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -42,7 +42,7 @@ cp -fr kernel/* %{buildroot}%{_usrsrc}/%{dkms_name}-%{version}/
 
 %if 0%{?fedora}
 # Do not enable weak modules support in Fedora (no kABI):
-install -p -m 644 -D %{SOURCE2} %{buildroot}%{_sysconfdir}/dkms/%{dkms_nvidia}.conf
+install -p -m 644 -D %{SOURCE2} %{buildroot}%{_sysconfdir}/dkms/%{dkms_name}.conf
 %endif
 
 %post
@@ -58,10 +58,13 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %files
 %{_usrsrc}/%{dkms_name}-%{version}
 %if 0%{?fedora}
-%{_sysconfdir}/dkms/%{dkms_nvidia}.conf
+%{_sysconfdir}/dkms/%{dkms_name}.conf
 %endif
 
 %changelog
+* Thu Nov 04 2021 Simone Caronni <negativo17@gmail.com> - 3:495.44-2
+- Fix typo in dkms configuration file installation.
+
 * Tue Nov 02 2021 Simone Caronni <negativo17@gmail.com> - 3:495.44-1
 - Update to 495.44.
 
