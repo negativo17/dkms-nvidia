@@ -2,8 +2,8 @@
 %global dkms_name nvidia
 
 Name:           dkms-%{dkms_name}
-Version:        495.44
-Release:        2%{?dist}
+Version:        495.46
+Release:        1%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -62,6 +62,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Tue Dec 14 2021 Simone Caronni <negativo17@gmail.com> - 3:495.46-1
+- Update to 495.46.
+
 * Thu Nov 04 2021 Simone Caronni <negativo17@gmail.com> - 3:495.44-2
 - Fix typo in dkms configuration file installation.
 
