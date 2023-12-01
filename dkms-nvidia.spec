@@ -2,8 +2,8 @@
 %global dkms_name nvidia
 
 Name:           dkms-%{dkms_name}
-Version:        545.29.02
-Release:        3%{?dist}
+Version:        545.29.06
+Release:        1%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -65,6 +65,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Fri Dec 01 2023 Simone Caronni <negativo17@gmail.com> - 3:545.29.06-1
+- Update to 545.29.06.
+
 * Tue Nov 14 2023 Simone Caronni <negativo17@gmail.com> - 3:545.29.02-3
 - Update location of configuration file.
 
