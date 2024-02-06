@@ -2,8 +2,8 @@
 %global dkms_name nvidia
 
 Name:           dkms-%{dkms_name}
-Version:        545.29.06
-Release:        2%{?dist}
+Version:        550.40.07
+Release:        1%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -14,7 +14,6 @@ ExclusiveArch:  x86_64
 Source0:        %{dkms_name}-kmod-%{version}-x86_64.tar.xz
 Source1:        %{name}.conf
 Source2:        dkms-no-weak-modules.conf
-Patch0:         %{dkms_name}-kmod-67.patch
 
 BuildRequires:  sed
 
@@ -66,6 +65,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Tue Feb 06 2024 Simone Caronni <negativo17@gmail.com> - 3:550.40.07-1
+- Update to 550.40.07.
+
 * Tue Feb 06 2024 Simone Caronni <negativo17@gmail.com> - 3:545.29.06-2
 - Add patch to fix build with the latest 6.6/6.7 kernels.
 
