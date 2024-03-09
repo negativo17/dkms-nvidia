@@ -3,17 +3,18 @@
 
 Name:           dkms-%{dkms_name}
 Version:        550.54.14
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
 URL:            http://www.nvidia.com/object/unix.html
 # Package is not noarch as it contains pre-compiled binary code
-ExclusiveArch:  x86_64
+ExclusiveArch:  x86_64 aarch64
 
 Source0:        %{dkms_name}-kmod-%{version}-x86_64.tar.xz
-Source1:        %{name}.conf
-Source2:        dkms-no-weak-modules.conf
+Source1:        %{dkms_name}-kmod-%{version}-aarch64.tar.xz
+Source2:        %{name}.conf
+Source3:        dkms-no-weak-modules.conf
 
 BuildRequires:  sed
 
@@ -29,9 +30,15 @@ The modules are rebuilt through the DKMS system when a new kernel or modules
 become available.
 
 %prep
-%autosetup -p1 -n %{dkms_name}-kmod-%{version}-x86_64
+%ifarch x86_64
+%setup -q -n %{dkms_name}-kmod-%{version}-x86_64
+%endif
 
-cp -f %{SOURCE1} dkms.conf
+%ifarch aarch64
+%setup -q -T -b 1 -n %{dkms_name}-kmod-%{version}-aarch64
+%endif
+
+cp -f %{SOURCE2} dkms.conf
 
 sed -i -e 's/__VERSION_STRING/%{version}/g' kernel/dkms.conf
 
@@ -45,7 +52,7 @@ rm -f %{buildroot}%{_usrsrc}/%{dkms_name}-%{version}/*/dkms.conf
 
 %if 0%{?fedora}
 # Do not enable weak modules support in Fedora (no kABI):
-install -p -m 644 -D %{SOURCE2} %{buildroot}%{_sysconfdir}/dkms/%{dkms_name}.conf
+install -p -m 644 -D %{SOURCE3} %{buildroot}%{_sysconfdir}/dkms/%{dkms_name}.conf
 %endif
 
 %post
@@ -65,6 +72,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Sat Mar 09 2024 Simone Caronni <negativo17@gmail.com> - 3:550.54.14-2
+- Enable aarch64.
+
 * Sun Mar 03 2024 Simone Caronni <negativo17@gmail.com> - 3:550.54.14-1
 - Update to 550.54.14.
 
