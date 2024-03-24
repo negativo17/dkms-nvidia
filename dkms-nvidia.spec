@@ -2,8 +2,8 @@
 %global dkms_name nvidia
 
 Name:           dkms-%{dkms_name}
-Version:        550.54.14
-Release:        2%{?dist}
+Version:        550.67
+Release:        1%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -72,6 +72,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Sun Mar 24 2024 Simone Caronni <negativo17@gmail.com> - 3:550.67-1
+- Update to 550.67.
+
 * Sat Mar 09 2024 Simone Caronni <negativo17@gmail.com> - 3:550.54.14-2
 - Enable aarch64.
 
