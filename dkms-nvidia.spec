@@ -3,7 +3,7 @@
 
 Name:           dkms-%{dkms_name}
 Version:        560.35.03
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -15,6 +15,8 @@ Source0:        %{dkms_name}-kmod-%{version}-x86_64.tar.xz
 Source1:        %{dkms_name}-kmod-%{version}-aarch64.tar.xz
 Source2:        %{name}.conf
 Source3:        dkms-no-weak-modules.conf
+# https://github.com/NVIDIA/open-gpu-kernel-modules/pull/692
+Patch0:         kernel-6.11.patch
 
 BuildRequires:  sed
 
@@ -38,9 +40,11 @@ become available.
 %setup -q -T -b 1 -n %{dkms_name}-kmod-%{version}-aarch64
 %endif
 
+%patch -P 0 -p1
+
 cp -f %{SOURCE2} dkms.conf
 
-sed -i -e 's/__VERSION_STRING/%{version}/g' kernel/dkms.conf
+sed -i -e 's/__VERSION_STRING/%{version}/g' dkms.conf
 
 %build
 
@@ -72,6 +76,10 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Fri Oct 11 2024 Simone Caronni <negativo17@gmail.com> - 3:560.35.03-2
+- Fix versioning in the dkms.conf file.
+- Add kernel 6.11 patch
+
 * Wed Sep 04 2024 Simone Caronni <negativo17@gmail.com> - 3:560.35.03-1
 - Update to 560.35.03.
 
