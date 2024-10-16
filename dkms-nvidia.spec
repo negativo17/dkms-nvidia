@@ -3,7 +3,7 @@
 
 Name:           dkms-%{dkms_name}
 Version:        560.35.03
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -60,14 +60,14 @@ install -p -m 644 -D %{SOURCE3} %{buildroot}%{_sysconfdir}/dkms/%{dkms_name}.con
 %endif
 
 %post
-dkms add -m %{dkms_name} -v %{version} -q || :
+dkms add -m %{dkms_name} -v %{version} -q --rpm_safe_upgrade || :
 # Rebuild and make available for the currently running kernel:
 dkms build -m %{dkms_name} -v %{version} -q || :
 dkms install -m %{dkms_name} -v %{version} -q --force || :
 
 %preun
 # Remove all versions from DKMS registry:
-dkms remove -m %{dkms_name} -v %{version} -q --all || :
+dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 
 %files
 %{_usrsrc}/%{dkms_name}-%{version}
@@ -76,6 +76,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all || :
 %endif
 
 %changelog
+* Wed Oct 16 2024 Simone Caronni <negativo17@gmail.com> - 3:560.35.03-3
+- Do not uninstall in preun scriptlet in case of an upgrade.
+
 * Fri Oct 11 2024 Simone Caronni <negativo17@gmail.com> - 3:560.35.03-2
 - Fix versioning in the dkms.conf file.
 - Add kernel 6.11 patch
