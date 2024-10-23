@@ -31,11 +31,11 @@ become available.
 
 %prep
 %ifarch x86_64
-%setup -q -n %{dkms_name}-kmod-%{version}-x86_64
+%autosetup -p1 -n %{dkms_name}-kmod-%{version}-x86_64
 %endif
 
 %ifarch aarch64
-%setup -q -T -b 1 -n %{dkms_name}-kmod-%{version}-aarch64
+%autosetup -p1 -T -b 1 -n %{dkms_name}-kmod-%{version}-aarch64
 %endif
 
 cp -f %{SOURCE2} dkms.conf
