@@ -3,7 +3,7 @@
 
 Name:           dkms-%{dkms_name}
 Version:        565.57.01
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -72,6 +72,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %endif
 
 %changelog
+* Thu Dec 05 2024 Simone Caronni <negativo17@gmail.com> - 3:565.57.01-2
+- Update to 565.77.
+
 * Wed Oct 23 2024 Simone Caronni <negativo17@gmail.com> - 3:565.57.01-1
 - Update to 565.57.01.
 
