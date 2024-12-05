@@ -2,7 +2,7 @@
 %global dkms_name nvidia
 
 Name:           dkms-%{dkms_name}
-Version:        565.57.01
+Version:        565.77
 Release:        1%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
@@ -72,6 +72,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %endif
 
 %changelog
+* Thu Dec 05 2024 Simone Caronni <negativo17@gmail.com> - 3:565.77-1
+- Update to 565.77.
+
 * Wed Oct 23 2024 Simone Caronni <negativo17@gmail.com> - 3:565.57.01-1
 - Update to 565.57.01.
 
