@@ -3,7 +3,7 @@
 
 Name:           dkms-%{dkms_name}
 Version:        570.86.16
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -14,7 +14,6 @@ ExclusiveArch:  x86_64 aarch64
 Source0:        %{dkms_name}-kmod-%{version}-x86_64.tar.xz
 Source1:        %{dkms_name}-kmod-%{version}-aarch64.tar.xz
 Source2:        %{name}.conf
-Source3:        dkms-no-weak-modules.conf
 
 BuildRequires:  sed
 
@@ -50,11 +49,6 @@ mkdir -p %{buildroot}%{_usrsrc}/%{dkms_name}-%{version}/
 cp -fr * %{buildroot}%{_usrsrc}/%{dkms_name}-%{version}/
 rm -f %{buildroot}%{_usrsrc}/%{dkms_name}-%{version}/*/dkms.conf
 
-%if 0%{?fedora}
-# Do not enable weak modules support in Fedora (no kABI):
-install -p -m 644 -D %{SOURCE3} %{buildroot}%{_sysconfdir}/dkms/%{dkms_name}.conf
-%endif
-
 %post
 dkms add -m %{dkms_name} -v %{version} -q --rpm_safe_upgrade || :
 # Rebuild and make available for the currently running kernel:
@@ -67,11 +61,11 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 
 %files
 %{_usrsrc}/%{dkms_name}-%{version}
-%if 0%{?fedora}
-%{_sysconfdir}/dkms/%{dkms_name}.conf
-%endif
 
 %changelog
+* Sun Feb 09 2025 Simone Caronni <negativo17@gmail.com> - 3:570.86.16-2
+- Simplify DKMS configuration.
+
 * Fri Jan 31 2025 Simone Caronni <negativo17@gmail.com> - 3:570.86.16-1
 - Update to 570.86.16.
 
