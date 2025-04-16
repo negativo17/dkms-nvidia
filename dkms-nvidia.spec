@@ -2,8 +2,8 @@
 %global dkms_name nvidia
 
 Name:           dkms-%{dkms_name}
-Version:        570.133.07
-Release:        2%{?dist}
+Version:        575.51.02
+Release:        1%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -65,6 +65,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Wed Apr 16 2025 Simone Caronni <negativo17@gmail.com> - 3:575.51.02-1
+- Update to 575.51.02.
+
 * Sat Apr 12 2025 Simone Caronni <negativo17@gmail.com> - 3:570.133.07-2
 - Convert EXTRA_CFLAGS to ccflags-y for kernel 6.15 and add -std=gnu17 to fix
   compilation on Fedora 42's 6.14.1 kernel.
