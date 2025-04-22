@@ -1,6 +1,6 @@
-diff -Naur nvidia-kmod-570.133.07-x86_64.old/kernel/Kbuild nvidia-kmod-570.133.07-x86_64/kernel/Kbuild
---- nvidia-kmod-570.133.07-x86_64.old/kernel/Kbuild	2025-04-12 09:54:19.974786018 +0200
-+++ nvidia-kmod-570.133.07-x86_64/kernel/Kbuild	2025-04-12 09:56:58.900332108 +0200
+diff -Naur nvidia-kmod-570.144-x86_64.old/kernel/Kbuild nvidia-kmod-570.144-x86_64/kernel/Kbuild
+--- nvidia-kmod-570.144-x86_64.old/kernel/Kbuild	2025-04-22 18:48:24.654339111 +0200
++++ nvidia-kmod-570.144-x86_64/kernel/Kbuild	2025-04-22 18:49:47.096193408 +0200
 @@ -74,22 +74,15 @@
  $(foreach _module, $(NV_KERNEL_MODULES), \
   $(eval include $(src)/$(_module)/$(_module).Kbuild))
@@ -17,13 +17,13 @@ diff -Naur nvidia-kmod-570.133.07-x86_64.old/kernel/Kbuild nvidia-kmod-570.133.0
 -EXTRA_CFLAGS += -I$(src)
 -EXTRA_CFLAGS += -Wall $(DEFINES) $(INCLUDES) -Wno-cast-qual -Wno-format-extra-args
 -EXTRA_CFLAGS += -D__KERNEL__ -DMODULE -DNVRM
--EXTRA_CFLAGS += -DNV_VERSION_STRING=\"570.133.07\"
+-EXTRA_CFLAGS += -DNV_VERSION_STRING=\"570.144\"
 +ccflags-y += -std=gnu17
 +ccflags-y += -I$(src)/common/inc
 +ccflags-y += -I$(src)
 +ccflags-y += -Wall $(DEFINES) $(INCLUDES) -Wno-cast-qual -Wno-format-extra-args
 +ccflags-y += -D__KERNEL__ -DMODULE -DNVRM
-+ccflags-y += -DNV_VERSION_STRING=\"570.133.07\"
++ccflags-y += -DNV_VERSION_STRING=\"570.144\"
  
  ifneq ($(SYSSRCHOST1X),)
 - EXTRA_CFLAGS += -I$(SYSSRCHOST1X)
@@ -116,9 +116,9 @@ diff -Naur nvidia-kmod-570.133.07-x86_64.old/kernel/Kbuild nvidia-kmod-570.133.0
  NV_CONFTEST_CFLAGS += $(call cc-disable-warning,pointer-sign)
  NV_CONFTEST_CFLAGS += $(call cc-option,-fshort-wchar,)
  NV_CONFTEST_CFLAGS += $(call cc-option,-Werror=incompatible-pointer-types,)
-diff -Naur nvidia-kmod-570.133.07-x86_64.old/kernel-open/Kbuild nvidia-kmod-570.133.07-x86_64/kernel-open/Kbuild
---- nvidia-kmod-570.133.07-x86_64.old/kernel-open/Kbuild	2025-04-12 09:54:20.039786545 +0200
-+++ nvidia-kmod-570.133.07-x86_64/kernel-open/Kbuild	2025-04-12 09:56:51.436478034 +0200
+diff -Naur nvidia-kmod-570.144-x86_64.old/kernel-open/Kbuild nvidia-kmod-570.144-x86_64/kernel-open/Kbuild
+--- nvidia-kmod-570.144-x86_64.old/kernel-open/Kbuild	2025-04-22 18:48:24.724339639 +0200
++++ nvidia-kmod-570.144-x86_64/kernel-open/Kbuild	2025-04-22 18:49:47.096479327 +0200
 @@ -75,21 +75,15 @@
   $(eval include $(src)/$(_module)/$(_module).Kbuild))
  
@@ -134,13 +134,13 @@ diff -Naur nvidia-kmod-570.133.07-x86_64.old/kernel-open/Kbuild nvidia-kmod-570.
 -EXTRA_CFLAGS += -I$(src)
 -EXTRA_CFLAGS += -Wall $(DEFINES) $(INCLUDES) -Wno-cast-qual -Wno-format-extra-args
 -EXTRA_CFLAGS += -D__KERNEL__ -DMODULE -DNVRM
--EXTRA_CFLAGS += -DNV_VERSION_STRING=\"570.133.07\"
+-EXTRA_CFLAGS += -DNV_VERSION_STRING=\"570.144\"
 +ccflags-y += -std=gnu17
 +ccflags-y += -I$(src)/common/inc
 +ccflags-y += -I$(src)
 +ccflags-y += -Wall $(DEFINES) $(INCLUDES) -Wno-cast-qual -Wno-format-extra-args
 +ccflags-y += -D__KERNEL__ -DMODULE -DNVRM
-+ccflags-y += -DNV_VERSION_STRING=\"570.133.07\"
++ccflags-y += -DNV_VERSION_STRING=\"570.144\"
  
  ifneq ($(SYSSRCHOST1X),)
 - EXTRA_CFLAGS += -I$(SYSSRCHOST1X)
