@@ -1,11 +1,10 @@
-diff -Naur nvidia-kmod-570.144-x86_64.old/kernel/Kbuild nvidia-kmod-570.144-x86_64/kernel/Kbuild
---- nvidia-kmod-570.144-x86_64.old/kernel/Kbuild	2025-04-22 18:48:24.654339111 +0200
-+++ nvidia-kmod-570.144-x86_64/kernel/Kbuild	2025-04-22 18:49:47.096193408 +0200
-@@ -74,22 +74,15 @@
- $(foreach _module, $(NV_KERNEL_MODULES), \
+diff -Naur nvidia-kmod-575.51.02-x86_64.old/kernel/Kbuild nvidia-kmod-575.51.02-x86_64/kernel/Kbuild
+--- nvidia-kmod-575.51.02-x86_64.old/kernel/Kbuild	2025-04-22 18:54:37.758155663 +0200
++++ nvidia-kmod-575.51.02-x86_64/kernel/Kbuild	2025-04-22 18:54:45.069483044 +0200
+@@ -75,21 +75,15 @@
   $(eval include $(src)/$(_module)/$(_module).Kbuild))
  
--
+ 
 -#
 -# Define CFLAGS that apply to all the NVIDIA kernel modules. EXTRA_CFLAGS
 -# is deprecated since 2.6.24 in favor of ccflags-y, but we need to support
@@ -17,13 +16,13 @@ diff -Naur nvidia-kmod-570.144-x86_64.old/kernel/Kbuild nvidia-kmod-570.144-x86_
 -EXTRA_CFLAGS += -I$(src)
 -EXTRA_CFLAGS += -Wall $(DEFINES) $(INCLUDES) -Wno-cast-qual -Wno-format-extra-args
 -EXTRA_CFLAGS += -D__KERNEL__ -DMODULE -DNVRM
--EXTRA_CFLAGS += -DNV_VERSION_STRING=\"570.144\"
+-EXTRA_CFLAGS += -DNV_VERSION_STRING=\"575.51.02\"
 +ccflags-y += -std=gnu17
 +ccflags-y += -I$(src)/common/inc
 +ccflags-y += -I$(src)
 +ccflags-y += -Wall $(DEFINES) $(INCLUDES) -Wno-cast-qual -Wno-format-extra-args
 +ccflags-y += -D__KERNEL__ -DMODULE -DNVRM
-+ccflags-y += -DNV_VERSION_STRING=\"570.144\"
++ccflags-y += -DNV_VERSION_STRING=\"575.51.02\"
  
  ifneq ($(SYSSRCHOST1X),)
 - EXTRA_CFLAGS += -I$(SYSSRCHOST1X)
@@ -31,7 +30,7 @@ diff -Naur nvidia-kmod-570.144-x86_64.old/kernel/Kbuild nvidia-kmod-570.144-x86_
  endif
  
  # Some Android kernels prohibit driver use of filesystem functions like
-@@ -99,57 +92,57 @@
+@@ -99,57 +93,57 @@
  PLATFORM_IS_ANDROID ?= 0
  
  ifeq ($(PLATFORM_IS_ANDROID),1)
@@ -107,7 +106,7 @@ diff -Naur nvidia-kmod-570.144-x86_64.old/kernel/Kbuild nvidia-kmod-570.144-x86_
  endif
  
  WARNINGS_AS_ERRORS ?=
-@@ -183,7 +176,7 @@
+@@ -183,7 +177,7 @@
  
  NV_CFLAGS_FROM_CONFTEST := $(shell $(NV_CONFTEST_CMD) build_cflags)
  
@@ -116,9 +115,9 @@ diff -Naur nvidia-kmod-570.144-x86_64.old/kernel/Kbuild nvidia-kmod-570.144-x86_
  NV_CONFTEST_CFLAGS += $(call cc-disable-warning,pointer-sign)
  NV_CONFTEST_CFLAGS += $(call cc-option,-fshort-wchar,)
  NV_CONFTEST_CFLAGS += $(call cc-option,-Werror=incompatible-pointer-types,)
-diff -Naur nvidia-kmod-570.144-x86_64.old/kernel-open/Kbuild nvidia-kmod-570.144-x86_64/kernel-open/Kbuild
---- nvidia-kmod-570.144-x86_64.old/kernel-open/Kbuild	2025-04-22 18:48:24.724339639 +0200
-+++ nvidia-kmod-570.144-x86_64/kernel-open/Kbuild	2025-04-22 18:49:47.096479327 +0200
+diff -Naur nvidia-kmod-575.51.02-x86_64.old/kernel-open/Kbuild nvidia-kmod-575.51.02-x86_64/kernel-open/Kbuild
+--- nvidia-kmod-575.51.02-x86_64.old/kernel-open/Kbuild	2025-04-22 18:54:37.828156191 +0200
++++ nvidia-kmod-575.51.02-x86_64/kernel-open/Kbuild	2025-04-22 18:54:45.069786396 +0200
 @@ -75,21 +75,15 @@
   $(eval include $(src)/$(_module)/$(_module).Kbuild))
  
@@ -134,13 +133,13 @@ diff -Naur nvidia-kmod-570.144-x86_64.old/kernel-open/Kbuild nvidia-kmod-570.144
 -EXTRA_CFLAGS += -I$(src)
 -EXTRA_CFLAGS += -Wall $(DEFINES) $(INCLUDES) -Wno-cast-qual -Wno-format-extra-args
 -EXTRA_CFLAGS += -D__KERNEL__ -DMODULE -DNVRM
--EXTRA_CFLAGS += -DNV_VERSION_STRING=\"570.144\"
+-EXTRA_CFLAGS += -DNV_VERSION_STRING=\"575.51.02\"
 +ccflags-y += -std=gnu17
 +ccflags-y += -I$(src)/common/inc
 +ccflags-y += -I$(src)
 +ccflags-y += -Wall $(DEFINES) $(INCLUDES) -Wno-cast-qual -Wno-format-extra-args
 +ccflags-y += -D__KERNEL__ -DMODULE -DNVRM
-+ccflags-y += -DNV_VERSION_STRING=\"570.144\"
++ccflags-y += -DNV_VERSION_STRING=\"575.51.02\"
  
  ifneq ($(SYSSRCHOST1X),)
 - EXTRA_CFLAGS += -I$(SYSSRCHOST1X)
