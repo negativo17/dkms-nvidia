@@ -3,7 +3,7 @@
 
 Name:           dkms-%{dkms_name}
 Version:        580.95.05
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -52,8 +52,8 @@ rm -f %{buildroot}%{_usrsrc}/%{dkms_name}-%{version}/*/dkms.conf
 %post
 dkms add -m %{dkms_name} -v %{version} -q --rpm_safe_upgrade || :
 # Rebuild and make available for the currently running kernel:
-dkms build -m %{dkms_name} -v %{version} -q || :
-dkms install -m %{dkms_name} -v %{version} -q --force || :
+dkms build -m %{dkms_name} -v %{version} -q --force
+dkms install -m %{dkms_name} -v %{version} -q --force
 
 %preun
 # Remove all versions from DKMS registry:
@@ -63,6 +63,10 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Wed Oct 08 2025 Simone Caronni <negativo17@gmail.com> - 3:580.95.05-2
+- Fix modules not getting rebuilt when reinstalling package.
+- Do not filter out as success module build steps.
+
 * Wed Oct 01 2025 Simone Caronni <negativo17@gmail.com> - 3:580.95.05-1
 - Update to 580.95.05.
 
