@@ -2,8 +2,8 @@
 %global dkms_name nvidia
 
 Name:           dkms-%{dkms_name}
-Version:        580.95.05
-Release:        2%{?dist}
+Version:        580.105.08
+Release:        1%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -63,6 +63,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Fri Nov 07 2025 Simone Caronni <negativo17@gmail.com> - 3:580.105.08-1
+- Update to 580.105.08.
+
 * Wed Oct 08 2025 Simone Caronni <negativo17@gmail.com> - 3:580.95.05-2
 - Fix modules not getting rebuilt when reinstalling package.
 - Do not filter out as success module build steps.
