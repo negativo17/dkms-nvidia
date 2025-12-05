@@ -2,19 +2,22 @@
 %global dkms_name nvidia
 
 Name:           dkms-%{dkms_name}
-Version:        580.105.08
+Version:        590.44.01
 Release:        1%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
 URL:            http://www.nvidia.com/object/unix.html
-# Package is not noarch as it contains pre-compiled binary code
-ExclusiveArch:  x86_64 aarch64
+BuildArch:      noarch
 
-Source0:        %{dkms_name}-kmod-%{version}-x86_64.tar.xz
-Source1:        %{dkms_name}-kmod-%{version}-aarch64.tar.xz
-Source2:        %{name}.conf
+Source0:        https://github.com/NVIDIA/open-gpu-kernel-modules/archive/%{version}/open-gpu-kernel-modules-%{version}.tar.gz
+Source1:        %{name}.conf
 
+# The run file contains precompiled C++ code for the open modules:
+#   kernel-open/nvidia/nv-kernel.o_binary
+#   kernel-open/nvidia-modeset/nv-modeset-kernel.o_binary
+# The full open tarball requires also a c++ compiler to build those bits:
+Requires:       gcc-c++
 BuildRequires:  sed
 
 Provides:       %{dkms_name}-kmod = %{?epoch:%{epoch}:}%{version}
@@ -29,15 +32,9 @@ The modules are rebuilt through the DKMS system when a new kernel or modules
 become available.
 
 %prep
-%ifarch x86_64
-%autosetup -p1 -n %{dkms_name}-kmod-%{version}-x86_64
-%endif
+%autosetup -p1 -n open-gpu-kernel-modules-%{version}
 
-%ifarch aarch64
-%autosetup -p1 -T -b 1 -n %{dkms_name}-kmod-%{version}-aarch64
-%endif
-
-cp -f %{SOURCE2} dkms.conf
+cp -f %{SOURCE1} dkms.conf
 
 sed -i -e 's/__VERSION_STRING/%{version}/g' dkms.conf
 
@@ -63,6 +60,11 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Fri Dec 05 2025 Simone Caronni <negativo17@gmail.com> - 3:590.44.01-1
+- Update to 590.44.01.
+- Drop proprietary modules support (required only for vGPU).
+- Switch to open source tarball.
+
 * Fri Nov 07 2025 Simone Caronni <negativo17@gmail.com> - 3:580.105.08-1
 - Update to 580.105.08.
 
