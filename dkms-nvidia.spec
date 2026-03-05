@@ -2,8 +2,8 @@
 %global dkms_name nvidia
 
 Name:           dkms-%{dkms_name}
-Version:        590.48.01
-Release:        2%{?dist}
+Version:        595.45.04
+Release:        1%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -12,7 +12,6 @@ BuildArch:      noarch
 
 Source0:        https://github.com/NVIDIA/open-gpu-kernel-modules/archive/%{version}/open-gpu-kernel-modules-%{version}.tar.gz
 Source1:        %{name}.conf
-Patch0:         https://github.com/CachyOS/open-gpu-kernel-modules/commit/c9457ce40a6af2ce74c520564e2d8775f49e3d27.patch
 
 BuildRequires:  sed
 
@@ -61,6 +60,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Thu Mar 05 2026 Simone Caronni <negativo17@gmail.com> - 3:595.45.04-1
+- Update to 595.45.04.
+
 * Thu Feb 12 2026 Simone Caronni <negativo17@gmail.com> - 3:590.48.01-2
 - Add 6.19 kernel patch.
 
