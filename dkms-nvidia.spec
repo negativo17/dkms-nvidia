@@ -3,7 +3,7 @@
 
 Name:           dkms-%{dkms_name}
 Version:        615.71.09
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -12,6 +12,8 @@ BuildArch:      noarch
 
 Source0:        https://github.com/NVIDIA/open-gpu-kernel-modules/archive/%{version}/open-gpu-kernel-modules-%{version}.tar.gz
 Source1:        %{name}.conf
+Patch0:         https://github.com/anatase-org/open-gpu-kernel-modules/commit/ab2ed1443400caa8097da1107ccd0eda8e6a5354.patch
+Patch1:         https://github.com/anatase-org/open-gpu-kernel-modules/commit/2fa83dac159ee4be2f2e08be8f211aadf6a65c5c.patch
 
 BuildRequires:  sed
 
@@ -60,6 +62,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Tue Sep 22 2026 Simone Caronni <negativo17@gmail.com> - 3:615.71.09-2
+- Add patches from Anatase (https://anatase.org/).
+
 * Thu Sep 10 2026 Simone Caronni <negativo17@gmail.com> - 3:615.71.09-1
 - Update to 615.71.09.
 
