@@ -12,8 +12,10 @@ BuildArch:      noarch
 
 Source0:        https://github.com/NVIDIA/open-gpu-kernel-modules/archive/%{version}/open-gpu-kernel-modules-%{version}.tar.gz
 Source1:        %{name}.conf
-Patch0:         https://github.com/anatase-org/open-gpu-kernel-modules/commit/ab2ed1443400caa8097da1107ccd0eda8e6a5354.patch
-Patch1:         https://github.com/anatase-org/open-gpu-kernel-modules/commit/2fa83dac159ee4be2f2e08be8f211aadf6a65c5c.patch
+Patch0:         https://github.com/scaronni/open-gpu-kernel-modules/commit/f84dd30f52ee525e78686e6853ba0c2894057b5c.patch
+Patch1:         https://github.com/scaronni/open-gpu-kernel-modules/commit/62a33c475b89031c8f893bd82c2e9d4c82a9a025.patch
+Patch2:         https://github.com/scaronni/open-gpu-kernel-modules/commit/e8197c87647b90b4c9eb2a82aae85d009e108442.patch
+Patch3:         https://github.com/scaronni/open-gpu-kernel-modules/commit/77957d11eaa9bf4ba1c3c9a7137a9099e652fcb1.patch
 
 # The run file contains precompiled C++ code for the open modules:
 #   kernel-open/nvidia/nv-kernel.o_binary
@@ -64,6 +66,7 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %changelog
 * Wed Nov 04 2026 Simone Caronni <negativo17@gmail.com> - 3:620.70.06-1
 - Update to 620.70.06.
+- Add Big Screen Beyond patches.
 
 * Wed Oct 07 2026 Simone Caronni <negativo17@gmail.com> - 3:615.78.08-1
 - Update to 615.78.08.
