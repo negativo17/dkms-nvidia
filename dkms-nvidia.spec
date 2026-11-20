@@ -2,8 +2,8 @@
 %global dkms_name nvidia
 
 Name:           dkms-%{dkms_name}
-Version:        620.70.06
-Release:        2%{?dist}
+Version:        620.73.04
+Release:        1%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -12,11 +12,12 @@ BuildArch:      noarch
 
 Source0:        https://github.com/NVIDIA/open-gpu-kernel-modules/archive/%{version}/open-gpu-kernel-modules-%{version}.tar.gz
 Source1:        %{name}.conf
-Patch0:         https://github.com/scaronni/open-gpu-kernel-modules/commit/f84dd30f52ee525e78686e6853ba0c2894057b5c.patch
-Patch1:         https://github.com/scaronni/open-gpu-kernel-modules/commit/62a33c475b89031c8f893bd82c2e9d4c82a9a025.patch
-Patch2:         https://github.com/scaronni/open-gpu-kernel-modules/commit/e8197c87647b90b4c9eb2a82aae85d009e108442.patch
-Patch3:         https://github.com/scaronni/open-gpu-kernel-modules/commit/77957d11eaa9bf4ba1c3c9a7137a9099e652fcb1.patch
-Patch4:         https://github.com/scaronni/open-gpu-kernel-modules/commit/fdec4df00281d26337ff65ddb393365f715b6cb5.patch
+Patch0:         https://github.com/scaronni/open-gpu-kernel-modules/commit/6463b796de5f39c0ceb9ee290b4d450a63bd6ebd.patch
+Patch1:         https://github.com/scaronni/open-gpu-kernel-modules/commit/99daf1b3fb4d530556e23ebb4dcee885061f7046.patch
+Patch2:         https://github.com/scaronni/open-gpu-kernel-modules/commit/ebbabacf94c7b714968aac35f8d87efc1d1242ae.patch
+Patch3:         https://github.com/scaronni/open-gpu-kernel-modules/commit/ec611b40147f1033f9107cc6609f2fec43e0a7fb.patch
+Patch4:         https://github.com/scaronni/open-gpu-kernel-modules/commit/98c7fb589dc757feb847437b8c8b9fdfa7952a58.patch
+Patch5:         https://github.com/scaronni/open-gpu-kernel-modules/commit/183968f7298478acf159ced293c05b68f0972c5d.patch
 
 BuildRequires:  sed
 
@@ -65,6 +66,10 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Fri Nov 20 2026 Simone Caronni <negativo17@gmail.com> - 3:620.73.04-1
+- Update to 620.73.04.
+- Add fix for multi tile CRTC monitors.
+
 * Thu Nov 12 2026 Simone Caronni <negativo17@gmail.com> - 3:620.70.06-2
 - Re-enable D3 Power Management for 7.3.
 
