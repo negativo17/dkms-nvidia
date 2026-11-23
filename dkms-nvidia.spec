@@ -3,7 +3,7 @@
 
 Name:           dkms-%{dkms_name}
 Version:        620.73.04
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -28,6 +28,7 @@ BuildRequires:  sed
 
 Provides:       %{dkms_name}-kmod = %{?epoch:%{epoch}:}%{version}
 Requires:       %{dkms_name}-kmod-common = %{?epoch:%{epoch}:}%{version}
+Requires(post): %{dkms_name}-kmod-common = %{?epoch:%{epoch}:}%{version}
 Requires:       dkms
 
 Conflicts:      akmod-nvidia
@@ -66,6 +67,10 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Mon Nov 23 2026 Simone Caronni <negativo17@gmail.com> - 3:620.73.04-2
+- Require nvidia-kmod-common(post) to make sure firmware is in place when
+  rebuilding the initrd.
+
 * Fri Nov 20 2026 Simone Caronni <negativo17@gmail.com> - 3:620.73.04-1
 - Update to 620.73.04.
 - Add fix for multi tile CRTC monitors.
