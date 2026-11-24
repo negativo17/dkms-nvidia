@@ -3,7 +3,7 @@
 
 Name:           dkms-%{dkms_name}
 Version:        620.73.04
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        NVIDIA display driver kernel module
 Epoch:          3
 License:        NVIDIA License
@@ -12,12 +12,12 @@ BuildArch:      noarch
 
 Source0:        https://github.com/NVIDIA/open-gpu-kernel-modules/archive/%{version}/open-gpu-kernel-modules-%{version}.tar.gz
 Source1:        %{name}.conf
-Patch0:         https://github.com/scaronni/open-gpu-kernel-modules/commit/6463b796de5f39c0ceb9ee290b4d450a63bd6ebd.patch
-Patch1:         https://github.com/scaronni/open-gpu-kernel-modules/commit/99daf1b3fb4d530556e23ebb4dcee885061f7046.patch
-Patch2:         https://github.com/scaronni/open-gpu-kernel-modules/commit/ebbabacf94c7b714968aac35f8d87efc1d1242ae.patch
-Patch3:         https://github.com/scaronni/open-gpu-kernel-modules/commit/ec611b40147f1033f9107cc6609f2fec43e0a7fb.patch
-Patch4:         https://github.com/scaronni/open-gpu-kernel-modules/commit/98c7fb589dc757feb847437b8c8b9fdfa7952a58.patch
-Patch5:         https://github.com/scaronni/open-gpu-kernel-modules/commit/183968f7298478acf159ced293c05b68f0972c5d.patch
+Patch0:         https://github.com/scaronni/open-gpu-kernel-modules/commit/b9603156d6e9d17d3a32a3078a04b4ca0f5a9cef.patch
+Patch1:         https://github.com/scaronni/open-gpu-kernel-modules/commit/579afda91651f52e64aacf17ebb42eaf6c83742a.patch
+Patch2:         https://github.com/scaronni/open-gpu-kernel-modules/commit/434f0793e8b28943bc324765fbf9366603c66f7f.patch
+Patch3:         https://github.com/scaronni/open-gpu-kernel-modules/commit/739a44420f963b046fc02373922285255e8fa916.patch
+Patch4:         https://github.com/scaronni/open-gpu-kernel-modules/commit/a58a8804133957148cf54d447aca3fa1b6c838a0.patch
+Patch5:         https://github.com/scaronni/open-gpu-kernel-modules/commit/e9782174f16c4ee8567172772d22f709955383a5.patch
 
 # The run file contains precompiled C++ code for the open modules:
 #   kernel-open/nvidia/nv-kernel.o_binary
@@ -67,6 +67,9 @@ dkms remove -m %{dkms_name} -v %{version} -q --all --rpm_safe_upgrade || :
 %{_usrsrc}/%{dkms_name}-%{version}
 
 %changelog
+* Tue Nov 24 2026 Simone Caronni <negativo17@gmail.com> - 3:620.73.04-3
+- Update Thunderbolt eGPU patch, it no longer requires a patched kernel.
+
 * Mon Nov 23 2026 Simone Caronni <negativo17@gmail.com> - 3:620.73.04-2
 - Require nvidia-kmod-common(post) to make sure firmware is in place when
   rebuilding the initrd.
